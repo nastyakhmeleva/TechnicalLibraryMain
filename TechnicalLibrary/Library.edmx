@@ -1,0 +1,135 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl" Namespace="Library.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2005">
+        <EntityContainer Name="LibraryTargetContainer" >
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="Library" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="LibraryContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="PeopleSet" EntityType="Library.People" />
+          <EntitySet Name="DocumentSet" EntityType="Library.Document" />
+          <EntitySet Name="NoteSet" EntityType="Library.Note" />
+          <EntitySet Name="PeopleDocEntitySet" EntityType="Library.PeopleDocEntity" />
+          <AssociationSet Name="StDocEntityStudent" Association="Library.StDocEntityStudent">
+            <End Role="PeopleDocEntity" EntitySet="PeopleDocEntitySet" />
+            <End Role="People" EntitySet="PeopleSet" />
+          </AssociationSet>
+          <AssociationSet Name="NotePeople" Association="Library.NotePeople">
+            <End Role="Note" EntitySet="NoteSet" />
+            <End Role="People" EntitySet="PeopleSet" />
+          </AssociationSet>
+          <AssociationSet Name="NoteDocument" Association="Library.NoteDocument">
+            <End Role="Note" EntitySet="NoteSet" />
+            <End Role="Document" EntitySet="DocumentSet" />
+          </AssociationSet>
+          <AssociationSet Name="DocumentStDocEntity" Association="Library.DocumentStDocEntity">
+            <End Role="Document" EntitySet="DocumentSet" />
+            <End Role="PeopleDocEntity" EntitySet="PeopleDocEntitySet" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="People">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <Property Name="Status" Type="String" Nullable="false" />
+          <Property Name="HowToFind" Type="String" Nullable="false" />
+          <Property Name="AcademicTitle" Type="String" Nullable="false" />
+          <Property Name="AcademicDegree" Type="String" Nullable="false" />
+          <NavigationProperty Name="StDocEntity" Relationship="Library.StDocEntityStudent" FromRole="People" ToRole="PeopleDocEntity" />
+          <NavigationProperty Name="Note" Relationship="Library.NotePeople" FromRole="People" ToRole="Note" />
+        </EntityType>
+        <EntityType Name="Document">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Type" Type="String" Nullable="false" />
+          <Property Name="Year" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <Property Name="PrintCopy" Type="Int32" Nullable="false" />
+          <Property Name="ElectroCopy" Type="Int32" Nullable="false" />
+          <Property Name="AuthorID" Type="String" Nullable="false" />
+          <Property Name="BookAuthor" Type="String" Nullable="false" />
+          <Property Name="NumberOfCopy" Type="String" Nullable="false" />
+          <NavigationProperty Name="Note" Relationship="Library.NoteDocument" FromRole="Document" ToRole="Note" />
+          <NavigationProperty Name="StDocEntity" Relationship="Library.DocumentStDocEntity" FromRole="Document" ToRole="PeopleDocEntity" />
+        </EntityType>
+        <EntityType Name="Note">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DocumentID" Type="Int32" Nullable="false" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="DateOfIssue" Type="DateTime" Nullable="false" />
+          <Property Name="Status" Type="String" Nullable="false" />
+          <Property Name="NumberOfCopy" Type="String" Nullable="false" />
+          <NavigationProperty Name="People" Relationship="Library.NotePeople" FromRole="Note" ToRole="People" />
+          <NavigationProperty Name="Document" Relationship="Library.NoteDocument" FromRole="Note" ToRole="Document" />
+        </EntityType>
+        <EntityType Name="PeopleDocEntity">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PeopleID" Type="String" Nullable="false" />
+          <Property Name="DocID" Type="String" Nullable="false" />
+          <NavigationProperty Name="Student" Relationship="Library.StDocEntityStudent" FromRole="PeopleDocEntity" ToRole="People" />
+          <NavigationProperty Name="Document" Relationship="Library.DocumentStDocEntity" FromRole="PeopleDocEntity" ToRole="Document" />
+        </EntityType>
+        <Association Name="StDocEntityStudent">
+          <End Type="Library.PeopleDocEntity" Role="PeopleDocEntity" Multiplicity="1" />
+          <End Type="Library.People" Role="People" Multiplicity="*" />
+        </Association>
+        <Association Name="NotePeople">
+          <End Type="Library.Note" Role="Note" Multiplicity="*" />
+          <End Type="Library.People" Role="People" Multiplicity="1" />
+        </Association>
+        <Association Name="NoteDocument">
+          <End Type="Library.Note" Role="Note" Multiplicity="*" />
+          <End Type="Library.Document" Role="Document" Multiplicity="1" />
+        </Association>
+        <Association Name="DocumentStDocEntity">
+          <End Type="Library.Document" Role="Document" Multiplicity="*" />
+          <End Type="Library.PeopleDocEntity" Role="PeopleDocEntity" Multiplicity="1" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs" Space="C-S">
+        <Alias Key="Model" Value="Library" />
+        <Alias Key="Target" Value="Library.Store" />
+        <EntityContainerMapping CdmEntityContainer="LibraryContainer" StorageEntityContainer="LibraryTargetContainer">
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
