@@ -58,6 +58,7 @@
     <Compile Include="Author.cs">
       <DependentUpon>Library.tt</DependentUpon>
     </Compile>
+    <Compile Include="EnumStatus.cs" />
     <Compile Include="FormAddNewDoc.cs">
       <SubType>Form</SubType>
     </Compile>

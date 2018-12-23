@@ -25,8 +25,8 @@ namespace TechnicalLibrary
         public string Type { get; set; }
         public int Year { get; set; }
         public string Name { get; set; }
-        public int PrintCopy { get; set; }
-        public int ElectroCopy { get; set; }
+        public string PrintCopy { get; set; }
+        public string ElectroCopy { get; set; }
         public string BookAuthor { get; set; }
         public int NumberOfCopy { get; set; }
     

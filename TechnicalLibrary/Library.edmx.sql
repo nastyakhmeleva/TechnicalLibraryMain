@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 12/23/2018 00:15:30
+-- Date Created: 12/23/2018 13:06:18
 -- Generated from EDMX file: C:\Users\User\Source\Repos\TechnicalLibrary\TechnicalLibrary\Library.edmx
 -- --------------------------------------------------
 
@@ -75,8 +75,8 @@ CREATE TABLE [dbo].[DocumentSet] (
     [Type] nvarchar(max)  NOT NULL,
     [Year] int  NOT NULL,
     [Name] nvarchar(max)  NOT NULL,
-    [PrintCopy] int  NOT NULL,
-    [ElectroCopy] int  NOT NULL,
+    [PrintCopy] nvarchar(max)  NOT NULL,
+    [ElectroCopy] nvarchar(max)  NOT NULL,
     [BookAuthor] nvarchar(max)  NULL,
     [NumberOfCopy] int  NOT NULL
 );
@@ -96,7 +96,7 @@ GO
 -- Creating table 'PeopleDocEntitySet'
 CREATE TABLE [dbo].[PeopleDocEntitySet] (
     [Id] int IDENTITY(1,1) NOT NULL,
-    [Student_Id] int  NOT NULL,
+    [Author_Id] int  NOT NULL,
     [Document_Id] int  NOT NULL
 );
 GO
@@ -146,10 +146,10 @@ GO
 -- Creating all FOREIGN KEY constraints
 -- --------------------------------------------------
 
--- Creating foreign key on [Student_Id] in table 'PeopleDocEntitySet'
+-- Creating foreign key on [Author_Id] in table 'PeopleDocEntitySet'
 ALTER TABLE [dbo].[PeopleDocEntitySet]
 ADD CONSTRAINT [FK_StDocEntityStudent]
-    FOREIGN KEY ([Student_Id])
+    FOREIGN KEY ([Author_Id])
     REFERENCES [dbo].[AuthorSet]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
@@ -158,7 +158,7 @@ GO
 -- Creating non-clustered index for FOREIGN KEY 'FK_StDocEntityStudent'
 CREATE INDEX [IX_FK_StDocEntityStudent]
 ON [dbo].[PeopleDocEntitySet]
-    ([Student_Id]);
+    ([Author_Id]);
 GO
 
 -- Creating foreign key on [Document_Id] in table 'NoteSet'

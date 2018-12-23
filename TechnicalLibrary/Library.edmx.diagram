@@ -5,14 +5,14 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="58b4702900f244ef9bfd9e4c61f0a54a" Name="Diagram1" ZoomLevel="99" >
-        <EntityTypeShape EntityType="Library.Author" Width="1.5" PointX="7.375" PointY="6.125" />
-        <EntityTypeShape EntityType="Library.Document" Width="1.5" PointX="1" PointY="5" />
-        <EntityTypeShape EntityType="Library.Note" Width="1.5" PointX="4.125" PointY="3.375" />
-        <EntityTypeShape EntityType="Library.PeopleDocEntity" Width="1.5" PointX="4.25" PointY="6.875" />
+        <EntityTypeShape EntityType="Library.Author" Width="1.5" PointX="7.5" PointY="3.25" />
+        <EntityTypeShape EntityType="Library.Document" Width="1.5" PointX="1.125" PointY="2.125" />
+        <EntityTypeShape EntityType="Library.Note" Width="1.5" PointX="4.25" PointY="0.5" />
+        <EntityTypeShape EntityType="Library.PeopleDocEntity" Width="1.5" PointX="4.375" PointY="4" />
         <AssociationConnector Association="Library.StDocEntityStudent" />
         <AssociationConnector Association="Library.NoteDocument" />
         <AssociationConnector Association="Library.DocumentStDocEntity" />
-        <EntityTypeShape EntityType="Library.Reader" Width="1.5" PointX="7.375" PointY="3.5" />
+        <EntityTypeShape EntityType="Library.Reader" Width="1.5" PointX="7.5" PointY="0.625" />
         <AssociationConnector Association="Library.ReaderAuthor" />
         <AssociationConnector Association="Library.NoteReader" />
       </Diagram>

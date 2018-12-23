@@ -35,24 +35,28 @@
             this.label3 = new System.Windows.Forms.Label();
             this.textBoxYear = new System.Windows.Forms.TextBox();
             this.groupBoxStudent = new System.Windows.Forms.GroupBox();
+            this.comboBoxStudentName = new System.Windows.Forms.ComboBox();
+            this.comboBoxGroup = new System.Windows.Forms.ComboBox();
             this.labelGroup = new System.Windows.Forms.Label();
             this.labelStudentName = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.comboBoxStatus = new System.Windows.Forms.ComboBox();
             this.groupBoxEmployee = new System.Windows.Forms.GroupBox();
+            this.comboBoxAcademicTitle = new System.Windows.Forms.ComboBox();
+            this.comboBoxAcademicDegree = new System.Windows.Forms.ComboBox();
+            this.comboBoxEmployeeName = new System.Windows.Forms.ComboBox();
+            this.comboBoxDepartment = new System.Windows.Forms.ComboBox();
             this.labelAcademicTitle = new System.Windows.Forms.Label();
             this.labelAcademicDegree = new System.Windows.Forms.Label();
             this.labelDepartment = new System.Windows.Forms.Label();
             this.labelEmployeeName = new System.Windows.Forms.Label();
-            this.comboBoxGroup = new System.Windows.Forms.ComboBox();
-            this.comboBoxStudentName = new System.Windows.Forms.ComboBox();
-            this.comboBoxDepartment = new System.Windows.Forms.ComboBox();
-            this.comboBoxEmployeeName = new System.Windows.Forms.ComboBox();
-            this.comboBoxAcademicDegree = new System.Windows.Forms.ComboBox();
-            this.comboBoxAcademicTitle = new System.Windows.Forms.ComboBox();
             this.button1 = new System.Windows.Forms.Button();
             this.Save = new System.Windows.Forms.Button();
             this.Cancel = new System.Windows.Forms.Button();
+            this.labelPrintCopy = new System.Windows.Forms.Label();
+            this.labelDigCopy = new System.Windows.Forms.Label();
+            this.textBoxPrintCopy = new System.Windows.Forms.TextBox();
+            this.textBoxDigCopy = new System.Windows.Forms.TextBox();
             this.groupBoxStudent.SuspendLayout();
             this.groupBoxEmployee.SuspendLayout();
             this.SuspendLayout();
@@ -114,10 +118,26 @@
             this.groupBoxStudent.Controls.Add(this.labelStudentName);
             this.groupBoxStudent.Location = new System.Drawing.Point(12, 143);
             this.groupBoxStudent.Name = "groupBoxStudent";
-            this.groupBoxStudent.Size = new System.Drawing.Size(272, 98);
+            this.groupBoxStudent.Size = new System.Drawing.Size(276, 98);
             this.groupBoxStudent.TabIndex = 6;
             this.groupBoxStudent.TabStop = false;
             this.groupBoxStudent.Text = "Автор";
+            // 
+            // comboBoxStudentName
+            // 
+            this.comboBoxStudentName.FormattingEnabled = true;
+            this.comboBoxStudentName.Location = new System.Drawing.Point(54, 52);
+            this.comboBoxStudentName.Name = "comboBoxStudentName";
+            this.comboBoxStudentName.Size = new System.Drawing.Size(216, 21);
+            this.comboBoxStudentName.TabIndex = 3;
+            // 
+            // comboBoxGroup
+            // 
+            this.comboBoxGroup.FormattingEnabled = true;
+            this.comboBoxGroup.Location = new System.Drawing.Point(54, 25);
+            this.comboBoxGroup.Name = "comboBoxGroup";
+            this.comboBoxGroup.Size = new System.Drawing.Size(121, 21);
+            this.comboBoxGroup.TabIndex = 2;
             // 
             // labelGroup
             // 
@@ -171,6 +191,38 @@
             this.groupBoxEmployee.TabStop = false;
             this.groupBoxEmployee.Text = "Автор";
             // 
+            // comboBoxAcademicTitle
+            // 
+            this.comboBoxAcademicTitle.FormattingEnabled = true;
+            this.comboBoxAcademicTitle.Location = new System.Drawing.Point(99, 110);
+            this.comboBoxAcademicTitle.Name = "comboBoxAcademicTitle";
+            this.comboBoxAcademicTitle.Size = new System.Drawing.Size(167, 21);
+            this.comboBoxAcademicTitle.TabIndex = 7;
+            // 
+            // comboBoxAcademicDegree
+            // 
+            this.comboBoxAcademicDegree.FormattingEnabled = true;
+            this.comboBoxAcademicDegree.Location = new System.Drawing.Point(99, 82);
+            this.comboBoxAcademicDegree.Name = "comboBoxAcademicDegree";
+            this.comboBoxAcademicDegree.Size = new System.Drawing.Size(167, 21);
+            this.comboBoxAcademicDegree.TabIndex = 6;
+            // 
+            // comboBoxEmployeeName
+            // 
+            this.comboBoxEmployeeName.FormattingEnabled = true;
+            this.comboBoxEmployeeName.Location = new System.Drawing.Point(99, 52);
+            this.comboBoxEmployeeName.Name = "comboBoxEmployeeName";
+            this.comboBoxEmployeeName.Size = new System.Drawing.Size(167, 21);
+            this.comboBoxEmployeeName.TabIndex = 5;
+            // 
+            // comboBoxDepartment
+            // 
+            this.comboBoxDepartment.FormattingEnabled = true;
+            this.comboBoxDepartment.Location = new System.Drawing.Point(99, 25);
+            this.comboBoxDepartment.Name = "comboBoxDepartment";
+            this.comboBoxDepartment.Size = new System.Drawing.Size(167, 21);
+            this.comboBoxDepartment.TabIndex = 4;
+            // 
             // labelAcademicTitle
             // 
             this.labelAcademicTitle.AutoSize = true;
@@ -207,54 +259,6 @@
             this.labelEmployeeName.TabIndex = 0;
             this.labelEmployeeName.Text = "Имя";
             // 
-            // comboBoxGroup
-            // 
-            this.comboBoxGroup.FormattingEnabled = true;
-            this.comboBoxGroup.Location = new System.Drawing.Point(54, 25);
-            this.comboBoxGroup.Name = "comboBoxGroup";
-            this.comboBoxGroup.Size = new System.Drawing.Size(121, 21);
-            this.comboBoxGroup.TabIndex = 2;
-            // 
-            // comboBoxStudentName
-            // 
-            this.comboBoxStudentName.FormattingEnabled = true;
-            this.comboBoxStudentName.Location = new System.Drawing.Point(54, 52);
-            this.comboBoxStudentName.Name = "comboBoxStudentName";
-            this.comboBoxStudentName.Size = new System.Drawing.Size(212, 21);
-            this.comboBoxStudentName.TabIndex = 3;
-            // 
-            // comboBoxDepartment
-            // 
-            this.comboBoxDepartment.FormattingEnabled = true;
-            this.comboBoxDepartment.Location = new System.Drawing.Point(99, 25);
-            this.comboBoxDepartment.Name = "comboBoxDepartment";
-            this.comboBoxDepartment.Size = new System.Drawing.Size(167, 21);
-            this.comboBoxDepartment.TabIndex = 4;
-            // 
-            // comboBoxEmployeeName
-            // 
-            this.comboBoxEmployeeName.FormattingEnabled = true;
-            this.comboBoxEmployeeName.Location = new System.Drawing.Point(99, 52);
-            this.comboBoxEmployeeName.Name = "comboBoxEmployeeName";
-            this.comboBoxEmployeeName.Size = new System.Drawing.Size(167, 21);
-            this.comboBoxEmployeeName.TabIndex = 5;
-            // 
-            // comboBoxAcademicDegree
-            // 
-            this.comboBoxAcademicDegree.FormattingEnabled = true;
-            this.comboBoxAcademicDegree.Location = new System.Drawing.Point(99, 82);
-            this.comboBoxAcademicDegree.Name = "comboBoxAcademicDegree";
-            this.comboBoxAcademicDegree.Size = new System.Drawing.Size(167, 21);
-            this.comboBoxAcademicDegree.TabIndex = 6;
-            // 
-            // comboBoxAcademicTitle
-            // 
-            this.comboBoxAcademicTitle.FormattingEnabled = true;
-            this.comboBoxAcademicTitle.Location = new System.Drawing.Point(99, 110);
-            this.comboBoxAcademicTitle.Name = "comboBoxAcademicTitle";
-            this.comboBoxAcademicTitle.Size = new System.Drawing.Size(167, 21);
-            this.comboBoxAcademicTitle.TabIndex = 7;
-            // 
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(298, 106);
@@ -283,11 +287,47 @@
             this.Cancel.Text = "Отменить добавление";
             this.Cancel.UseVisualStyleBackColor = true;
             // 
+            // labelPrintCopy
+            // 
+            this.labelPrintCopy.AutoSize = true;
+            this.labelPrintCopy.Location = new System.Drawing.Point(9, 252);
+            this.labelPrintCopy.Name = "labelPrintCopy";
+            this.labelPrintCopy.Size = new System.Drawing.Size(104, 13);
+            this.labelPrintCopy.TabIndex = 11;
+            this.labelPrintCopy.Text = "Физическая копия";
+            // 
+            // labelDigCopy
+            // 
+            this.labelDigCopy.AutoSize = true;
+            this.labelDigCopy.Location = new System.Drawing.Point(9, 272);
+            this.labelDigCopy.Name = "labelDigCopy";
+            this.labelDigCopy.Size = new System.Drawing.Size(106, 13);
+            this.labelDigCopy.TabIndex = 12;
+            this.labelDigCopy.Text = "Электронная копия";
+            // 
+            // textBoxPrintCopy
+            // 
+            this.textBoxPrintCopy.Location = new System.Drawing.Point(119, 249);
+            this.textBoxPrintCopy.Name = "textBoxPrintCopy";
+            this.textBoxPrintCopy.Size = new System.Drawing.Size(169, 20);
+            this.textBoxPrintCopy.TabIndex = 13;
+            // 
+            // textBoxDigCopy
+            // 
+            this.textBoxDigCopy.Location = new System.Drawing.Point(119, 269);
+            this.textBoxDigCopy.Name = "textBoxDigCopy";
+            this.textBoxDigCopy.Size = new System.Drawing.Size(169, 20);
+            this.textBoxDigCopy.TabIndex = 14;
+            // 
             // FormAddNewDoc
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(582, 366);
+            this.Controls.Add(this.textBoxDigCopy);
+            this.Controls.Add(this.textBoxPrintCopy);
+            this.Controls.Add(this.labelDigCopy);
+            this.Controls.Add(this.labelPrintCopy);
             this.Controls.Add(this.Cancel);
             this.Controls.Add(this.Save);
             this.Controls.Add(this.button1);
@@ -303,6 +343,7 @@
             this.Controls.Add(this.label1);
             this.Name = "FormAddNewDoc";
             this.Text = "AddNewDoc";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormAddNewDoc_FormClosing);
             this.groupBoxStudent.ResumeLayout(false);
             this.groupBoxStudent.PerformLayout();
             this.groupBoxEmployee.ResumeLayout(false);
@@ -339,5 +380,9 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button Save;
         private System.Windows.Forms.Button Cancel;
+        private System.Windows.Forms.Label labelPrintCopy;
+        private System.Windows.Forms.Label labelDigCopy;
+        private System.Windows.Forms.TextBox textBoxPrintCopy;
+        private System.Windows.Forms.TextBox textBoxDigCopy;
     }
 }

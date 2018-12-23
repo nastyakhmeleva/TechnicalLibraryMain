@@ -19,13 +19,11 @@ namespace TechnicalLibrary
             InitializeComponent();
             ShowComboboxes();
         }
-
         public void ShowComboboxes()
         {
-            comboBoxTypeOfDoc.Items.Clear();
             foreach (Document doc in model.DocumentSet)
             {
-                comboBoxTypeOfDoc.Items.Add(doc.Type);
+                comboBoxTypeOfDoc.Items.Add(doc);
             }
             comboBoxStatus.Items.Clear();
             foreach (Author author in model.AuthorSet)
@@ -73,7 +71,94 @@ namespace TechnicalLibrary
 
         private void Save_Click(object sender, EventArgs e)
         {
-            
+            var documents = model.DocumentSet.Where(u => u.Name.Contains(textBoxTitle.Text)).ToList();
+            if (documents.Count <= 0)
+            {
+                if (((textBoxTitle.Text != "") && (textBoxYear.Text != "") && (textBoxPrintCopy.Text!="")&&(textBoxDigCopy.Text!="")&&
+                     (comboBoxTypeOfDoc.SelectedItem != null) && (comboBoxStatus.SelectedItem != null) &&
+                     (comboBoxGroup.SelectedItem != null) && (comboBoxStudentName.SelectedItem != null)) ||
+
+                    ((textBoxTitle.Text != "") && (textBoxYear.Text != "") && (textBoxPrintCopy.Text != "") && (textBoxDigCopy.Text != "") &&
+                     (comboBoxTypeOfDoc.SelectedItem != null) && (comboBoxStatus.SelectedItem != null) &&
+                     (comboBoxDepartment.SelectedItem != null) && (comboBoxEmployeeName.SelectedItem != null)))
+                {
+                    Document doc = new Document();
+                    {
+                        doc.Type = comboBoxTypeOfDoc.Text;
+                        doc.Name = textBoxTitle.Text;
+                        doc.PrintCopy = textBoxPrintCopy.Text;
+                        doc.ElectroCopy = textBoxDigCopy.Text;
+                        try
+                        {
+                            if (Int32.Parse(textBoxYear.Text) <= DateTime.Now.Year)
+                            {
+                                doc.Year = Int32.Parse(textBoxYear.Text);
+                            }
+                            else
+                            {
+                                MessageBox.Show("Неверно указан год");
+                                return;
+                            }
+                        }
+                        catch (FormatException)
+                        {
+                            MessageBox.Show("Неверно указан год");
+                            return;
+                        }
+
+                    }
+                    model.DocumentSet.Add(doc);
+                    model.SaveChanges();
+
+                    PeopleDocEntity ent = new PeopleDocEntity();
+                    {
+                        if ((comboBoxStudentName.Text != null) && (textBoxTitle.Text != ""))
+                        {
+                            ent.Author = model.AuthorSet.Find(model.AuthorSet
+                                .Where(x => x.Name.Contains(comboBoxStudentName.Text)).ToList()[0].Id);
+                            ent.Document =
+                                model.DocumentSet.Find(model.DocumentSet.Where(x => x.Name.Contains(textBoxTitle.Text))
+                                    .ToList()[0].Id);
+                        }
+
+                        if (comboBoxEmployeeName.Text != null)
+                        {
+                            ent.Author = model.AuthorSet.Find(model.AuthorSet
+                                .Where(x => x.Name.Contains(comboBoxEmployeeName.Text)).ToList()[0].Id);
+                            ent.Document =
+                                model.DocumentSet.Find(model.DocumentSet.Where(x => x.Name.Contains(textBoxTitle.Text))
+                                    .ToList()[0].Id);
+                        }
+                    }
+                    if (comboBoxStudentName.Text != null)
+                    {
+                        Author author =
+                            model.AuthorSet.Find(model.AuthorSet.Where(x => x.Name.Contains(comboBoxStudentName.Text))
+                                .ToList()[0].Id);
+                        author.StDocEntity.Add(ent);
+                    }
+
+                    if (comboBoxEmployeeName.Text != null)
+                    {
+                        Author author =
+                            model.AuthorSet.Find(model.AuthorSet.Where(x => x.Name.Contains(comboBoxEmployeeName.Text))
+                                .ToList()[0].Id);
+                        author.StDocEntity.Add(ent);
+                    }
+
+                    model.DocumentSet.Find(model.DocumentSet.Where(x => x.Name.Contains(textBoxTitle.Text)).ToList()[0]
+                        .Id);
+                    doc.StDocEntity.Add(ent);
+                    model.PeopleDocEntitySet.Add(ent);
+                    model.SaveChanges();
+                }
+
+            }
+        }
+
+        private void FormAddNewDoc_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            ParentMainForm.Show();
         }
     }
 }

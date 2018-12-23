@@ -52,8 +52,8 @@
     <Property Name="Type" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Year" Type="int" Nullable="false" />
     <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="PrintCopy" Type="int" Nullable="false" />
-    <Property Name="ElectroCopy" Type="int" Nullable="false" />
+    <Property Name="PrintCopy" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ElectroCopy" Type="nvarchar(max)" Nullable="false" />
     <Property Name="BookAuthor" Type="nvarchar(max)" Nullable="true" />
     <Property Name="NumberOfCopy" Type="int" Nullable="false" />
   </EntityType>
@@ -73,7 +73,7 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Student_Id" Type="int" Nullable="false" />
+    <Property Name="Author_Id" Type="int" Nullable="false" />
     <Property Name="Document_Id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="ReaderSet">
@@ -91,7 +91,7 @@
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="PeopleDocEntity">
-        <PropertyRef Name="Student_Id" />
+        <PropertyRef Name="Author_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -196,8 +196,8 @@
           <Property Name="Type" Type="String" Nullable="false" />
           <Property Name="Year" Type="Int32" Nullable="false" />
           <Property Name="Name" Type="String" Nullable="false" />
-          <Property Name="PrintCopy" Type="Int32" Nullable="false" />
-          <Property Name="ElectroCopy" Nullable="false" Type="Int32" />
+          <Property Name="PrintCopy" Type="String" Nullable="false" />
+          <Property Name="ElectroCopy" Nullable="false" Type="String" />
           <Property Name="BookAuthor" Type="String" Nullable="true" />
           <Property Name="NumberOfCopy" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Note" Relationship="Library.NoteDocument" FromRole="Document" ToRole="Note" />
@@ -309,7 +309,7 @@
     </EntitySetMapping>
     <AssociationSetMapping Name="StDocEntityStudent" TypeName="Library.StDocEntityStudent" StoreEntitySet="PeopleDocEntitySet">
       <EndProperty Name="People">
-        <ScalarProperty Name="Id" ColumnName="Student_Id" />
+        <ScalarProperty Name="Id" ColumnName="Author_Id" />
       </EndProperty>
       <EndProperty Name="PeopleDocEntity">
         <ScalarProperty Name="Id" ColumnName="Id" />
