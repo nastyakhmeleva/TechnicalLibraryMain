@@ -6,14 +6,18 @@
     <edmx:StorageModels>
     <Schema Namespace="Library.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityContainer Name="LibraryStoreContainer">
-    <EntitySet Name="AuthorSet" EntityType="Library.Store.AuthorSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="EmployeeSet" EntityType="Library.Store.EmployeeSet" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="DocumentSet" EntityType="Library.Store.DocumentSet" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="NoteSet" EntityType="Library.Store.NoteSet" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="PeopleDocEntitySet" EntityType="Library.Store.PeopleDocEntitySet" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="ReaderSet" EntityType="Library.Store.ReaderSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="StudentSet" EntityType="Library.Store.StudentSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TypeSet" EntityType="Library.Store.TypeSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="EducationDirectionSet" EntityType="Library.Store.EducationDirectionSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="StudyGroupSet" EntityType="Library.Store.StudyGroupSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="DepartmentSet" EntityType="Library.Store.DepartmentSet" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="StDocEntityStudent" Association="Library.Store.StDocEntityStudent">
       <End Role="PeopleDocEntity" EntitySet="PeopleDocEntitySet" />
-      <End Role="People" EntitySet="AuthorSet" />
+      <End Role="People" EntitySet="EmployeeSet" />
     </AssociationSet>
     <AssociationSet Name="NoteDocument" Association="Library.Store.NoteDocument">
       <End Role="Note" EntitySet="NoteSet" />
@@ -23,39 +27,57 @@
       <End Role="Document" EntitySet="DocumentSet" />
       <End Role="PeopleDocEntity" EntitySet="PeopleDocEntitySet" />
     </AssociationSet>
-    <AssociationSet Name="ReaderAuthor" Association="Library.Store.ReaderAuthor">
-      <End Role="Reader" EntitySet="ReaderSet" />
-      <End Role="Author" EntitySet="AuthorSet" />
+    <AssociationSet Name="PeopleDocEntityStudent" Association="Library.Store.PeopleDocEntityStudent">
+      <End Role="PeopleDocEntity" EntitySet="PeopleDocEntitySet" />
+      <End Role="Student" EntitySet="StudentSet" />
     </AssociationSet>
-    <AssociationSet Name="NoteReader" Association="Library.Store.NoteReader">
+    <AssociationSet Name="TypeDocument" Association="Library.Store.TypeDocument">
+      <End Role="Type" EntitySet="TypeSet" />
+      <End Role="Document" EntitySet="DocumentSet" />
+    </AssociationSet>
+    <AssociationSet Name="StudyGroupEducationDirection" Association="Library.Store.StudyGroupEducationDirection">
+      <End Role="StudyGroup" EntitySet="StudyGroupSet" />
+      <End Role="EducationDirection" EntitySet="EducationDirectionSet" />
+    </AssociationSet>
+    <AssociationSet Name="DepartmentEmployee" Association="Library.Store.DepartmentEmployee">
+      <End Role="Department" EntitySet="DepartmentSet" />
+      <End Role="Employee" EntitySet="EmployeeSet" />
+    </AssociationSet>
+    <AssociationSet Name="NoteStudent" Association="Library.Store.NoteStudent">
       <End Role="Note" EntitySet="NoteSet" />
-      <End Role="Reader" EntitySet="ReaderSet" />
+      <End Role="Student" EntitySet="StudentSet" />
+    </AssociationSet>
+    <AssociationSet Name="NoteEmployee" Association="Library.Store.NoteEmployee">
+      <End Role="Note" EntitySet="NoteSet" />
+      <End Role="Employee" EntitySet="EmployeeSet" />
+    </AssociationSet>
+    <AssociationSet Name="StudentStudyGroup" Association="Library.Store.StudentStudyGroup">
+      <End Role="Student" EntitySet="StudentSet" />
+      <End Role="StudyGroup" EntitySet="StudyGroupSet" />
     </AssociationSet>
   </EntityContainer>
-  <EntityType Name="AuthorSet">
+  <EntityType Name="EmployeeSet">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Status" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="StudyGroup" Type="nvarchar(max)" Nullable="true" />
     <Property Name="AcademicTitle" Type="nvarchar(max)" Nullable="true" />
     <Property Name="AcademicDegree" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="Department" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Department_Id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="DocumentSet">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Type" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Year" Type="int" Nullable="false" />
     <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
     <Property Name="PrintCopy" Type="nvarchar(max)" Nullable="false" />
     <Property Name="ElectroCopy" Type="nvarchar(max)" Nullable="false" />
     <Property Name="BookAuthor" Type="nvarchar(max)" Nullable="true" />
     <Property Name="NumberOfCopy" Type="int" Nullable="false" />
+    <Property Name="Type_Id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="NoteSet">
     <Key>
@@ -63,35 +85,67 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="DateOfIssue" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Status" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="StatusOfIssue" Type="nvarchar(max)" Nullable="false" />
     <Property Name="NumberOfCopy" Type="int" Nullable="false" />
     <Property Name="Document_Id" Type="int" Nullable="false" />
-    <Property Name="Reader_Id" Type="int" Nullable="false" />
+    <Property Name="Student_Id" Type="int" Nullable="true" />
+    <Property Name="Employee_Id" Type="int" Nullable="true" />
   </EntityType>
   <EntityType Name="PeopleDocEntitySet">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Author_Id" Type="int" Nullable="false" />
+    <Property Name="Employee_Id" Type="int" Nullable="true" />
     <Property Name="Document_Id" Type="int" Nullable="false" />
+    <Property Name="Student_Id" Type="int" Nullable="true" />
   </EntityType>
-  <EntityType Name="ReaderSet">
+  <EntityType Name="StudentSet">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Computed" Nullable="false" />
-    <Property Name="Author_Id" Type="int" Nullable="false" />
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="StudyGroup_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TypeSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="EducationDirectionSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="StudyGroupSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="EducationDirection_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DepartmentSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <Association Name="StDocEntityStudent">
     <End Role="PeopleDocEntity" Type="Library.Store.PeopleDocEntitySet" Multiplicity="*" />
-    <End Role="People" Type="Library.Store.AuthorSet" Multiplicity="1" />
+    <End Role="People" Type="Library.Store.EmployeeSet" Multiplicity="0..1" />
     <ReferentialConstraint>
       <Principal Role="People">
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="PeopleDocEntity">
-        <PropertyRef Name="Author_Id" />
+        <PropertyRef Name="Employee_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -119,27 +173,87 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="ReaderAuthor">
-    <End Role="Reader" Type="Library.Store.ReaderSet" Multiplicity="*" />
-    <End Role="Author" Type="Library.Store.AuthorSet" Multiplicity="1" />
+  <Association Name="PeopleDocEntityStudent">
+    <End Role="PeopleDocEntity" Type="Library.Store.PeopleDocEntitySet" Multiplicity="*" />
+    <End Role="Student" Type="Library.Store.StudentSet" Multiplicity="0..1" />
     <ReferentialConstraint>
-      <Principal Role="Author">
+      <Principal Role="Student">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="Reader">
-        <PropertyRef Name="Author_Id" />
+      <Dependent Role="PeopleDocEntity">
+        <PropertyRef Name="Student_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="NoteReader">
-    <End Role="Note" Type="Library.Store.NoteSet" Multiplicity="*" />
-    <End Role="Reader" Type="Library.Store.ReaderSet" Multiplicity="1" />
+  <Association Name="TypeDocument">
+    <End Role="Type" Type="Library.Store.TypeSet" Multiplicity="1" />
+    <End Role="Document" Type="Library.Store.DocumentSet" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Reader">
+      <Principal Role="Type">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Document">
+        <PropertyRef Name="Type_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="StudyGroupEducationDirection">
+    <End Role="StudyGroup" Type="Library.Store.StudyGroupSet" Multiplicity="*" />
+    <End Role="EducationDirection" Type="Library.Store.EducationDirectionSet" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="EducationDirection">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="StudyGroup">
+        <PropertyRef Name="EducationDirection_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="DepartmentEmployee">
+    <End Role="Department" Type="Library.Store.DepartmentSet" Multiplicity="1" />
+    <End Role="Employee" Type="Library.Store.EmployeeSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Department">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Employee">
+        <PropertyRef Name="Department_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="NoteStudent">
+    <End Role="Note" Type="Library.Store.NoteSet" Multiplicity="*" />
+    <End Role="Student" Type="Library.Store.StudentSet" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="Note">
-        <PropertyRef Name="Reader_Id" />
+        <PropertyRef Name="Student_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="NoteEmployee">
+    <End Role="Note" Type="Library.Store.NoteSet" Multiplicity="*" />
+    <End Role="Employee" Type="Library.Store.EmployeeSet" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Note">
+        <PropertyRef Name="Employee_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="StudentStudyGroup">
+    <End Role="Student" Type="Library.Store.StudentSet" Multiplicity="*" />
+    <End Role="StudyGroup" Type="Library.Store.StudyGroupSet" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="StudyGroup">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Student">
+        <PropertyRef Name="StudyGroup_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -148,13 +262,13 @@
     <edmx:ConceptualModels>
       <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="Library" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
         <EntityContainer Name="LibraryContainer" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="AuthorSet" EntityType="Library.Author" />
+          <EntitySet Name="EmployeeSet" EntityType="Library.Employee" />
           <EntitySet Name="DocumentSet" EntityType="Library.Document" />
           <EntitySet Name="NoteSet" EntityType="Library.Note" />
           <EntitySet Name="PeopleDocEntitySet" EntityType="Library.PeopleDocEntity" />
           <AssociationSet Name="StDocEntityStudent" Association="Library.StDocEntityStudent">
             <End Role="PeopleDocEntity" EntitySet="PeopleDocEntitySet" />
-            <End Role="People" EntitySet="AuthorSet" />
+            <End Role="People" EntitySet="EmployeeSet" />
           </AssociationSet>
           <AssociationSet Name="NoteDocument" Association="Library.NoteDocument">
             <End Role="Note" EntitySet="NoteSet" />
@@ -164,36 +278,57 @@
             <End Role="Document" EntitySet="DocumentSet" />
             <End Role="PeopleDocEntity" EntitySet="PeopleDocEntitySet" />
           </AssociationSet>
-          <EntitySet Name="ReaderSet" EntityType="Library.Reader" />
-          <AssociationSet Name="ReaderAuthor" Association="Library.ReaderAuthor">
-            <End Role="Reader" EntitySet="ReaderSet" />
-            <End Role="Author" EntitySet="AuthorSet" />
+          <EntitySet Name="StudentSet" EntityType="Library.Student" />
+          <AssociationSet Name="PeopleDocEntityStudent" Association="Library.PeopleDocEntityStudent">
+            <End Role="PeopleDocEntity" EntitySet="PeopleDocEntitySet" />
+            <End Role="Student" EntitySet="StudentSet" />
           </AssociationSet>
-          <AssociationSet Name="NoteReader" Association="Library.NoteReader">
+          <EntitySet Name="TypeSet" EntityType="Library.Type" />
+          <AssociationSet Name="TypeDocument" Association="Library.TypeDocument">
+            <End Role="Type" EntitySet="TypeSet" />
+            <End Role="Document" EntitySet="DocumentSet" />
+          </AssociationSet>
+          <EntitySet Name="EducationDirectionSet" EntityType="Library.EducationDirection" />
+          <EntitySet Name="StudyGroupSet" EntityType="Library.StudyGroup" />
+          <AssociationSet Name="StudyGroupEducationDirection" Association="Library.StudyGroupEducationDirection">
+            <End Role="StudyGroup" EntitySet="StudyGroupSet" />
+            <End Role="EducationDirection" EntitySet="EducationDirectionSet" />
+          </AssociationSet>
+          <EntitySet Name="DepartmentSet" EntityType="Library.Department" />
+          <AssociationSet Name="DepartmentEmployee" Association="Library.DepartmentEmployee">
+            <End Role="Department" EntitySet="DepartmentSet" />
+            <End Role="Employee" EntitySet="EmployeeSet" />
+          </AssociationSet>
+          <AssociationSet Name="NoteStudent" Association="Library.NoteStudent">
             <End Role="Note" EntitySet="NoteSet" />
-            <End Role="Reader" EntitySet="ReaderSet" />
+            <End Role="Student" EntitySet="StudentSet" />
+          </AssociationSet>
+          <AssociationSet Name="NoteEmployee" Association="Library.NoteEmployee">
+            <End Role="Note" EntitySet="NoteSet" />
+            <End Role="Employee" EntitySet="EmployeeSet" />
+          </AssociationSet>
+          <AssociationSet Name="StudentStudyGroup" Association="Library.StudentStudyGroup">
+            <End Role="Student" EntitySet="StudentSet" />
+            <End Role="StudyGroup" EntitySet="StudyGroupSet" />
           </AssociationSet>
         </EntityContainer>
-        <EntityType Name="Author">
+        <EntityType Name="Employee">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" Nullable="false" />
-          <Property Name="Status" Type="String" Nullable="false" />
-          <Property Name="StudyGroup" Type="String" Nullable="true" />
+          <NavigationProperty Name="PeopleDocEntity" Relationship="Library.StDocEntityStudent" FromRole="People" ToRole="PeopleDocEntity" />
+          <NavigationProperty Name="Department" Relationship="Library.DepartmentEmployee" FromRole="Employee" ToRole="Department" />
           <Property Name="AcademicTitle" Type="String" Nullable="true" />
           <Property Name="AcademicDegree" Type="String" Nullable="true" />
-          <NavigationProperty Name="StDocEntity" Relationship="Library.StDocEntityStudent" FromRole="People" ToRole="PeopleDocEntity" />
-          <NavigationProperty Name="Reader" Relationship="Library.ReaderAuthor" FromRole="Author" ToRole="Reader" />
-          <Property Name="Department" Type="String" Nullable="true" />
+          <NavigationProperty Name="Note" Relationship="Library.NoteEmployee" FromRole="Employee" ToRole="Note" />
         </EntityType>
         <EntityType Name="Document">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Type" Type="String" Nullable="false" />
           <Property Name="Year" Type="Int32" Nullable="false" />
           <Property Name="Name" Type="String" Nullable="false" />
           <Property Name="PrintCopy" Type="String" Nullable="false" />
@@ -201,7 +336,8 @@
           <Property Name="BookAuthor" Type="String" Nullable="true" />
           <Property Name="NumberOfCopy" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Note" Relationship="Library.NoteDocument" FromRole="Document" ToRole="Note" />
-          <NavigationProperty Name="StDocEntity" Relationship="Library.DocumentStDocEntity" FromRole="Document" ToRole="PeopleDocEntity" />
+          <NavigationProperty Name="PeopleDocEntity" Relationship="Library.DocumentStDocEntity" FromRole="Document" ToRole="PeopleDocEntity" />
+          <NavigationProperty Name="Type" Relationship="Library.TypeDocument" FromRole="Document" ToRole="Type" />
         </EntityType>
         <EntityType Name="Note">
           <Key>
@@ -209,22 +345,24 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="DateOfIssue" Type="String" Nullable="false" />
-          <Property Name="Status" Type="String" Nullable="false" />
+          <Property Name="StatusOfIssue" Type="String" Nullable="false" />
           <Property Name="NumberOfCopy" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Document" Relationship="Library.NoteDocument" FromRole="Note" ToRole="Document" />
-          <NavigationProperty Name="Reader" Relationship="Library.NoteReader" FromRole="Note" ToRole="Reader" />
+          <NavigationProperty Name="Student" Relationship="Library.NoteStudent" FromRole="Note" ToRole="Student" />
+          <NavigationProperty Name="Employee" Relationship="Library.NoteEmployee" FromRole="Note" ToRole="Employee" />
         </EntityType>
         <EntityType Name="PeopleDocEntity">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <NavigationProperty Name="Author" Relationship="Library.StDocEntityStudent" FromRole="PeopleDocEntity" ToRole="People" />
+          <NavigationProperty Name="Employee" Relationship="Library.StDocEntityStudent" FromRole="PeopleDocEntity" ToRole="People" />
           <NavigationProperty Name="Document" Relationship="Library.DocumentStDocEntity" FromRole="PeopleDocEntity" ToRole="Document" />
+          <NavigationProperty Name="Student" Relationship="Library.PeopleDocEntityStudent" FromRole="PeopleDocEntity" ToRole="Student" />
         </EntityType>
         <Association Name="StDocEntityStudent">
           <End Type="Library.PeopleDocEntity" Role="PeopleDocEntity" Multiplicity="*" />
-          <End Type="Library.Author" Role="People" Multiplicity="1" />
+          <End Type="Library.Employee" Role="People" Multiplicity="0..1" />
         </Association>
         <Association Name="NoteDocument">
           <End Type="Library.Note" Role="Note" Multiplicity="*" />
@@ -234,21 +372,76 @@
           <End Type="Library.Document" Role="Document" Multiplicity="1" />
           <End Type="Library.PeopleDocEntity" Role="PeopleDocEntity" Multiplicity="*" />
         </Association>
-        <EntityType Name="Reader">
+        <EntityType Name="Student">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
-          <NavigationProperty Name="Author" Relationship="Library.ReaderAuthor" FromRole="Reader" ToRole="Author" />
-          <NavigationProperty Name="Note" Relationship="Library.NoteReader" FromRole="Reader" ToRole="Note" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <NavigationProperty Name="PeopleDocEntity" Relationship="Library.PeopleDocEntityStudent" FromRole="Student" ToRole="PeopleDocEntity" />
+          <NavigationProperty Name="Note" Relationship="Library.NoteStudent" FromRole="Student" ToRole="Note" />
+          <NavigationProperty Name="StudyGroup" Relationship="Library.StudentStudyGroup" FromRole="Student" ToRole="StudyGroup" />
         </EntityType>
-        <Association Name="ReaderAuthor">
-          <End Type="Library.Reader" Role="Reader" Multiplicity="1" />
-          <End Type="Library.Author" Role="Author" Multiplicity="1" />
+        <Association Name="PeopleDocEntityStudent">
+          <End Type="Library.PeopleDocEntity" Role="PeopleDocEntity" Multiplicity="*" />
+          <End Type="Library.Student" Role="Student" Multiplicity="0..1" />
         </Association>
-        <Association Name="NoteReader">
+        <EntityType Name="Type">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <NavigationProperty Name="Document" Relationship="Library.TypeDocument" FromRole="Type" ToRole="Document" />
+        </EntityType>
+        <Association Name="TypeDocument">
+          <End Type="Library.Type" Role="Type" Multiplicity="1" />
+          <End Type="Library.Document" Role="Document" Multiplicity="*" />
+        </Association>
+        <EntityType Name="EducationDirection">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <NavigationProperty Name="StudyGroup" Relationship="Library.StudyGroupEducationDirection" FromRole="EducationDirection" ToRole="StudyGroup" />
+        </EntityType>
+        <EntityType Name="StudyGroup">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <NavigationProperty Name="EducationDirection" Relationship="Library.StudyGroupEducationDirection" FromRole="StudyGroup" ToRole="EducationDirection" />
+          <NavigationProperty Name="Student" Relationship="Library.StudentStudyGroup" FromRole="StudyGroup" ToRole="Student" />
+        </EntityType>
+        <Association Name="StudyGroupEducationDirection">
+          <End Type="Library.StudyGroup" Role="StudyGroup" Multiplicity="*" />
+          <End Type="Library.EducationDirection" Role="EducationDirection" Multiplicity="1" />
+        </Association>
+        <EntityType Name="Department">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <NavigationProperty Name="Employee" Relationship="Library.DepartmentEmployee" FromRole="Department" ToRole="Employee" />
+        </EntityType>
+        <Association Name="DepartmentEmployee">
+          <End Type="Library.Department" Role="Department" Multiplicity="1" />
+          <End Type="Library.Employee" Role="Employee" Multiplicity="*" />
+        </Association>
+        <Association Name="NoteStudent">
           <End Type="Library.Note" Role="Note" Multiplicity="*" />
-          <End Type="Library.Reader" Role="Reader" Multiplicity="1" />
+          <End Type="Library.Student" Role="Student" Multiplicity="0..1" />
+        </Association>
+        <Association Name="NoteEmployee">
+          <End Type="Library.Note" Role="Note" Multiplicity="*" />
+          <End Type="Library.Employee" Role="Employee" Multiplicity="0..1" />
+        </Association>
+        <Association Name="StudentStudyGroup">
+          <End Type="Library.Student" Role="Student" Multiplicity="*" />
+          <End Type="Library.StudyGroup" Role="StudyGroup" Multiplicity="1" />
         </Association>
       </Schema>
     </edmx:ConceptualModels>
@@ -256,16 +449,13 @@
     <edmx:Mappings>
     <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="LibraryStoreContainer" CdmEntityContainer="LibraryContainer">
-    <EntitySetMapping Name="AuthorSet">
-      <EntityTypeMapping TypeName="IsTypeOf(Library.Author)">
-        <MappingFragment StoreEntitySet="AuthorSet">
+    <EntitySetMapping Name="EmployeeSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Library.Employee)">
+        <MappingFragment StoreEntitySet="EmployeeSet">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="Status" ColumnName="Status" />
-          <ScalarProperty Name="StudyGroup" ColumnName="StudyGroup" />
           <ScalarProperty Name="AcademicTitle" ColumnName="AcademicTitle" />
           <ScalarProperty Name="AcademicDegree" ColumnName="AcademicDegree" />
-          <ScalarProperty Name="Department" ColumnName="Department" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -273,7 +463,6 @@
       <EntityTypeMapping TypeName="IsTypeOf(Library.Document)">
         <MappingFragment StoreEntitySet="DocumentSet">
           <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="Type" ColumnName="Type" />
           <ScalarProperty Name="Year" ColumnName="Year" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="PrintCopy" ColumnName="PrintCopy" />
@@ -288,7 +477,7 @@
         <MappingFragment StoreEntitySet="NoteSet">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="DateOfIssue" ColumnName="DateOfIssue" />
-          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="StatusOfIssue" ColumnName="StatusOfIssue" />
           <ScalarProperty Name="NumberOfCopy" ColumnName="NumberOfCopy" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -300,20 +489,54 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="ReaderSet">
-      <EntityTypeMapping TypeName="IsTypeOf(Library.Reader)">
-        <MappingFragment StoreEntitySet="ReaderSet">
+    <EntitySetMapping Name="StudentSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Library.Student)">
+        <MappingFragment StoreEntitySet="StudentSet">
           <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TypeSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Library.Type)">
+        <MappingFragment StoreEntitySet="TypeSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EducationDirectionSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Library.EducationDirection)">
+        <MappingFragment StoreEntitySet="EducationDirectionSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="StudyGroupSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Library.StudyGroup)">
+        <MappingFragment StoreEntitySet="StudyGroupSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DepartmentSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Library.Department)">
+        <MappingFragment StoreEntitySet="DepartmentSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <AssociationSetMapping Name="StDocEntityStudent" TypeName="Library.StDocEntityStudent" StoreEntitySet="PeopleDocEntitySet">
       <EndProperty Name="People">
-        <ScalarProperty Name="Id" ColumnName="Author_Id" />
+        <ScalarProperty Name="Id" ColumnName="Employee_Id" />
       </EndProperty>
       <EndProperty Name="PeopleDocEntity">
         <ScalarProperty Name="Id" ColumnName="Id" />
       </EndProperty>
+      <Condition ColumnName="Employee_Id" IsNull="false" />
     </AssociationSetMapping>
     <AssociationSetMapping Name="NoteDocument" TypeName="Library.NoteDocument" StoreEntitySet="NoteSet">
       <EndProperty Name="Document">
@@ -331,19 +554,62 @@
         <ScalarProperty Name="Id" ColumnName="Id" />
       </EndProperty>
     </AssociationSetMapping>
-    <AssociationSetMapping Name="ReaderAuthor" TypeName="Library.ReaderAuthor" StoreEntitySet="ReaderSet">
-      <EndProperty Name="Author">
-        <ScalarProperty Name="Id" ColumnName="Author_Id" />
+    <AssociationSetMapping Name="PeopleDocEntityStudent" TypeName="Library.PeopleDocEntityStudent" StoreEntitySet="PeopleDocEntitySet">
+      <EndProperty Name="Student">
+        <ScalarProperty Name="Id" ColumnName="Student_Id" />
       </EndProperty>
-      <EndProperty Name="Reader">
+      <EndProperty Name="PeopleDocEntity">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+      <Condition ColumnName="Student_Id" IsNull="false" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="TypeDocument" TypeName="Library.TypeDocument" StoreEntitySet="DocumentSet">
+      <EndProperty Name="Type">
+        <ScalarProperty Name="Id" ColumnName="Type_Id" />
+      </EndProperty>
+      <EndProperty Name="Document">
         <ScalarProperty Name="Id" ColumnName="Id" />
       </EndProperty>
     </AssociationSetMapping>
-    <AssociationSetMapping Name="NoteReader" TypeName="Library.NoteReader" StoreEntitySet="NoteSet">
-      <EndProperty Name="Reader">
-        <ScalarProperty Name="Id" ColumnName="Reader_Id" />
+    <AssociationSetMapping Name="StudyGroupEducationDirection" TypeName="Library.StudyGroupEducationDirection" StoreEntitySet="StudyGroupSet">
+      <EndProperty Name="EducationDirection">
+        <ScalarProperty Name="Id" ColumnName="EducationDirection_Id" />
+      </EndProperty>
+      <EndProperty Name="StudyGroup">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="DepartmentEmployee" TypeName="Library.DepartmentEmployee" StoreEntitySet="EmployeeSet">
+      <EndProperty Name="Department">
+        <ScalarProperty Name="Id" ColumnName="Department_Id" />
+      </EndProperty>
+      <EndProperty Name="Employee">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="NoteStudent" TypeName="Library.NoteStudent" StoreEntitySet="NoteSet">
+      <EndProperty Name="Student">
+        <ScalarProperty Name="Id" ColumnName="Student_Id" />
       </EndProperty>
       <EndProperty Name="Note">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+      <Condition ColumnName="Student_Id" IsNull="false" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="NoteEmployee" TypeName="Library.NoteEmployee" StoreEntitySet="NoteSet">
+      <EndProperty Name="Employee">
+        <ScalarProperty Name="Id" ColumnName="Employee_Id" />
+      </EndProperty>
+      <EndProperty Name="Note">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+      <Condition ColumnName="Employee_Id" IsNull="false" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="StudentStudyGroup" TypeName="Library.StudentStudyGroup" StoreEntitySet="StudentSet">
+      <EndProperty Name="StudyGroup">
+        <ScalarProperty Name="Id" ColumnName="StudyGroup_Id" />
+      </EndProperty>
+      <EndProperty Name="Student">
         <ScalarProperty Name="Id" ColumnName="Id" />
       </EndProperty>
     </AssociationSetMapping>

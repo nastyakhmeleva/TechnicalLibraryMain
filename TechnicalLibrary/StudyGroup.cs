@@ -12,24 +12,19 @@ namespace TechnicalLibrary
     using System;
     using System.Collections.Generic;
     
-    public partial class Author
+    public partial class StudyGroup
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Author()
+        public StudyGroup()
         {
-            this.StDocEntity = new HashSet<PeopleDocEntity>();
+            this.Student = new HashSet<Student>();
         }
     
         public int Id { get; set; }
         public string Name { get; set; }
-        public string Status { get; set; }
-        public string StudyGroup { get; set; }
-        public string AcademicTitle { get; set; }
-        public string AcademicDegree { get; set; }
-        public string Department { get; set; }
     
+        public virtual EducationDirection EducationDirection { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PeopleDocEntity> StDocEntity { get; set; }
-        public virtual Reader Reader { get; set; }
+        public virtual ICollection<Student> Student { get; set; }
     }
 }

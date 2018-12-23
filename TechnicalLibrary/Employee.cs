@@ -12,27 +12,24 @@ namespace TechnicalLibrary
     using System;
     using System.Collections.Generic;
     
-    public partial class Document
+    public partial class Employee
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Document()
+        public Employee()
         {
-            this.Note = new HashSet<Note>();
             this.PeopleDocEntity = new HashSet<PeopleDocEntity>();
+            this.Note = new HashSet<Note>();
         }
     
         public int Id { get; set; }
-        public int Year { get; set; }
         public string Name { get; set; }
-        public string PrintCopy { get; set; }
-        public string ElectroCopy { get; set; }
-        public string BookAuthor { get; set; }
-        public int NumberOfCopy { get; set; }
+        public string AcademicTitle { get; set; }
+        public string AcademicDegree { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Note> Note { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PeopleDocEntity> PeopleDocEntity { get; set; }
-        public virtual Type Type { get; set; }
+        public virtual Department Department { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Note> Note { get; set; }
     }
 }

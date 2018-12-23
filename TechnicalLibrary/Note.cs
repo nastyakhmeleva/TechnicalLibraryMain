@@ -16,10 +16,11 @@ namespace TechnicalLibrary
     {
         public int Id { get; set; }
         public string DateOfIssue { get; set; }
-        public string Status { get; set; }
+        public string StatusOfIssue { get; set; }
         public int NumberOfCopy { get; set; }
     
         public virtual Document Document { get; set; }
-        public virtual Reader Reader { get; set; }
+        public virtual Student Student { get; set; }
+        public virtual Employee Employee { get; set; }
     }
 }

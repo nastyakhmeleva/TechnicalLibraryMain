@@ -25,10 +25,14 @@ namespace TechnicalLibrary
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Author> AuthorSet { get; set; }
+        public virtual DbSet<Employee> EmployeeSet { get; set; }
         public virtual DbSet<Document> DocumentSet { get; set; }
         public virtual DbSet<Note> NoteSet { get; set; }
         public virtual DbSet<PeopleDocEntity> PeopleDocEntitySet { get; set; }
-        public virtual DbSet<Reader> ReaderSet { get; set; }
+        public virtual DbSet<Student> StudentSet { get; set; }
+        public virtual DbSet<Type> TypeSet { get; set; }
+        public virtual DbSet<EducationDirection> EducationDirectionSet { get; set; }
+        public virtual DbSet<StudyGroup> StudyGroupSet { get; set; }
+        public virtual DbSet<Department> DepartmentSet { get; set; }
     }
 }

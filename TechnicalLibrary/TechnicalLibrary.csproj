@@ -55,10 +55,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Author.cs">
+    <Compile Include="Department.cs">
       <DependentUpon>Library.tt</DependentUpon>
     </Compile>
-    <Compile Include="EnumStatus.cs" />
+    <Compile Include="EducationDirection.cs">
+      <DependentUpon>Library.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Employee.cs">
+      <DependentUpon>Library.tt</DependentUpon>
+    </Compile>
     <Compile Include="FormAddNewDoc.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -97,7 +102,13 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Reader.cs">
+    <Compile Include="Student.cs">
+      <DependentUpon>Library.tt</DependentUpon>
+    </Compile>
+    <Compile Include="StudyGroup.cs">
+      <DependentUpon>Library.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Type.cs">
       <DependentUpon>Library.tt</DependentUpon>
     </Compile>
     <EmbeddedResource Include="FormAddNewDoc.resx">

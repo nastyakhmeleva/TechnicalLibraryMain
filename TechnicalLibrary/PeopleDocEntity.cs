@@ -16,7 +16,8 @@ namespace TechnicalLibrary
     {
         public int Id { get; set; }
     
-        public virtual Author Author { get; set; }
+        public virtual Employee Employee { get; set; }
         public virtual Document Document { get; set; }
+        public virtual Student Student { get; set; }
     }
 }

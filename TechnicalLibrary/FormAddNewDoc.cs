@@ -18,55 +18,60 @@ namespace TechnicalLibrary
         {
             InitializeComponent();
             ShowComboboxes();
+            addDirection();
+            addGroup();
+            addStudentName();
+            addDirections();
+            addEmployeeName();
+        }
+
+        public void addDirection()
+        {
+            if (comboBoxStatus.Text == "Студент")
+            {
+                comboBoxDirection.DataSource = model.EducationDirectionSet.ToList();
+                comboBoxDirection.DisplayMember = "Name";
+            }
+        }
+
+        public void addGroup()
+        {
+            EducationDirection eddir = (EducationDirection)comboBoxDirection.SelectedItem;
+            List<StudyGroup> listSG = model.StudyGroupSet.Where(x => x.EducationDirection.Id == eddir.Id).ToList();
+            comboBoxGroup.DataSource = listSG;
+            comboBoxGroup.DisplayMember = "Name";
+        }
+
+        public void addStudentName()
+        {
+            StudyGroup stgr = (StudyGroup)comboBoxGroup.SelectedItem;
+            List<Student> listSt = model.StudentSet.Where(x => x.StudyGroup.Id == stgr.Id).ToList();
+            comboBoxStudentName.DataSource = listSt;
+            comboBoxStudentName.DisplayMember = "Name";
+        }
+        public void addDirections()
+        {
+            if (comboBoxStatus.Text == "Сотрудник")
+            {
+                comboBoxDepartment.DataSource = model.DepartmentSet.ToList();
+                comboBoxDepartment.DisplayMember = "Name";
+            }
+        }
+        public void addEmployeeName()
+        {
+            Department depart = (Department)comboBoxDepartment.SelectedItem;
+            List<Employee> listEmp = model.EmployeeSet.Where(x => x.Department.Id == depart.Id).ToList();
+            comboBoxEmployeeName.DataSource = listEmp;
+            comboBoxEmployeeName.DisplayMember = "Name";
         }
         public void ShowComboboxes()
         {
-            foreach (Document doc in model.DocumentSet)
+            comboBoxTypeOfDoc.Items.Clear();
+            foreach (Type type in model.TypeSet)
             {
-                comboBoxTypeOfDoc.Items.Add(doc);
+                if (type.Name!=null)
+                    comboBoxTypeOfDoc.Items.Add(type.Name);
             }
-            comboBoxStatus.Items.Clear();
-            foreach (Author author in model.AuthorSet)
-            {
-                comboBoxStatus.Items.Add(author.Status);
-            }
-            comboBoxGroup.Items.Clear();
-            foreach (Author author in model.AuthorSet)
-            {
-                if (author.StudyGroup!=null)
-                comboBoxGroup.Items.Add(author.StudyGroup);
-            }
-            comboBoxStudentName.Items.Clear();
-            foreach (Author author in model.AuthorSet)
-            {
-                if (author.StudyGroup != null)
-                comboBoxStudentName.Items.Add(author.Name);
-            }
-            comboBoxDepartment.Items.Clear();
-            foreach (Author author in model.AuthorSet)
-            {
-                if (author.Department != null)
-                    comboBoxDepartment.Items.Add(author.Department);
-            }
-            comboBoxEmployeeName.Items.Clear();
-            foreach (Author author in model.AuthorSet)
-            {
-                if (author.Department != null)
-                    comboBoxEmployeeName.Items.Add(author.Name);
-            }
-            comboBoxAcademicDegree.Items.Clear();
-            foreach (Author author in model.AuthorSet)
-            {
-                if (author.AcademicDegree != null)
-                    comboBoxAcademicDegree.Items.Add(author.AcademicDegree);
-            }
-            comboBoxAcademicTitle.Items.Clear();
-            foreach (Author author in model.AuthorSet)
-            {
-                if (author.AcademicTitle != null)
-                    comboBoxAcademicTitle.Items.Add(author.AcademicTitle);
-            }
-
         }
 
         private void Save_Click(object sender, EventArgs e)
@@ -84,7 +89,7 @@ namespace TechnicalLibrary
                 {
                     Document doc = new Document();
                     {
-                        doc.Type = comboBoxTypeOfDoc.Text;
+                        doc.Type.Name = comboBoxTypeOfDoc.Text;
                         doc.Name = textBoxTitle.Text;
                         doc.PrintCopy = textBoxPrintCopy.Text;
                         doc.ElectroCopy = textBoxDigCopy.Text;
@@ -105,8 +110,8 @@ namespace TechnicalLibrary
                             MessageBox.Show("Неверно указан год");
                             return;
                         }
-
                     }
+                    
                     model.DocumentSet.Add(doc);
                     model.SaveChanges();
 
@@ -114,16 +119,16 @@ namespace TechnicalLibrary
                     {
                         if ((comboBoxStudentName.Text != null) && (textBoxTitle.Text != ""))
                         {
-                            ent.Author = model.AuthorSet.Find(model.AuthorSet
+                            ent.Student = model.StudentSet.Find(model.StudentSet
                                 .Where(x => x.Name.Contains(comboBoxStudentName.Text)).ToList()[0].Id);
                             ent.Document =
                                 model.DocumentSet.Find(model.DocumentSet.Where(x => x.Name.Contains(textBoxTitle.Text))
                                     .ToList()[0].Id);
                         }
 
-                        if (comboBoxEmployeeName.Text != null)
+                        if ((comboBoxEmployeeName.Text != null) && (textBoxTitle.Text != ""))
                         {
-                            ent.Author = model.AuthorSet.Find(model.AuthorSet
+                            ent.Employee = model.EmployeeSet.Find(model.EmployeeSet
                                 .Where(x => x.Name.Contains(comboBoxEmployeeName.Text)).ToList()[0].Id);
                             ent.Document =
                                 model.DocumentSet.Find(model.DocumentSet.Where(x => x.Name.Contains(textBoxTitle.Text))
@@ -132,33 +137,56 @@ namespace TechnicalLibrary
                     }
                     if (comboBoxStudentName.Text != null)
                     {
-                        Author author =
-                            model.AuthorSet.Find(model.AuthorSet.Where(x => x.Name.Contains(comboBoxStudentName.Text))
+                        Student student =
+                            model.StudentSet.Find(model.StudentSet.Where(x => x.Name.Contains(comboBoxStudentName.Text))
                                 .ToList()[0].Id);
-                        author.StDocEntity.Add(ent);
+                        student.PeopleDocEntity.Add(ent);
                     }
 
                     if (comboBoxEmployeeName.Text != null)
                     {
-                        Author author =
-                            model.AuthorSet.Find(model.AuthorSet.Where(x => x.Name.Contains(comboBoxEmployeeName.Text))
+                        Employee employee =
+                            model.EmployeeSet.Find(model.EmployeeSet.Where(x => x.Name.Contains(comboBoxEmployeeName.Text))
                                 .ToList()[0].Id);
-                        author.StDocEntity.Add(ent);
+                        employee.PeopleDocEntity.Add(ent);
                     }
 
                     model.DocumentSet.Find(model.DocumentSet.Where(x => x.Name.Contains(textBoxTitle.Text)).ToList()[0]
                         .Id);
-                    doc.StDocEntity.Add(ent);
+                    doc.PeopleDocEntity.Add(ent);
                     model.PeopleDocEntitySet.Add(ent);
                     model.SaveChanges();
                 }
-
             }
         }
 
         private void FormAddNewDoc_FormClosing(object sender, FormClosingEventArgs e)
         {
             ParentMainForm.Show();
+        }
+
+        private void comboBoxDirection_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            EducationDirection eddir = (EducationDirection)comboBoxDirection.SelectedItem;
+            List<StudyGroup> listSG = model.StudyGroupSet.Where(x => x.EducationDirection.Id == eddir.Id).ToList();
+            comboBoxGroup.DataSource = listSG;
+            comboBoxGroup.DisplayMember = "Name";
+        }
+
+        private void comboBoxGroup_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            StudyGroup stgr = (StudyGroup)comboBoxGroup.SelectedItem;
+            List<Student> listSt = model.StudentSet.Where(x => x.StudyGroup.Id == stgr.Id).ToList();
+            comboBoxStudentName.DataSource = listSt;
+            comboBoxStudentName.DisplayMember = "Name";
+        }
+
+        private void comboBoxDepartment_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Department depart = (Department)comboBoxDepartment.SelectedItem;
+            List<Employee> listEmp = model.EmployeeSet.Where(x => x.Department.Id == depart.Id).ToList();
+            comboBoxEmployeeName.DataSource = listEmp;
+            comboBoxEmployeeName.DisplayMember = "Name";
         }
     }
 }
