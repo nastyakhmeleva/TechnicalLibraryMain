@@ -74,6 +74,8 @@ namespace TechnicalLibrary
                     
                     model.DocumentSet.Add(doc);
                     model.SaveChanges();
+                    MessageBox.Show("Новый документ успешно добавлен");
+                    Close();
                     
 
                     PeopleDocEntity ent = new PeopleDocEntity();
