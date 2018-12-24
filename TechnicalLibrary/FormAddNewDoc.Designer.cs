@@ -59,7 +59,10 @@
             this.labelDigCopy = new System.Windows.Forms.Label();
             this.textBoxPrintCopy = new System.Windows.Forms.TextBox();
             this.textBoxDigCopy = new System.Windows.Forms.TextBox();
-            this.buttonOKdirect = new System.Windows.Forms.Button();
+            this.buttonOK = new System.Windows.Forms.Button();
+            this.buttonAddFile = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
+            this.textBoxNumberOfCopy = new System.Windows.Forms.TextBox();
             this.groupBoxStudent.SuspendLayout();
             this.groupBoxEmployee.SuspendLayout();
             this.SuspendLayout();
@@ -67,7 +70,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(13, 13);
+            this.label1.Location = new System.Drawing.Point(12, 13);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(83, 13);
             this.label1.TabIndex = 0;
@@ -84,7 +87,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(13, 45);
+            this.label2.Location = new System.Drawing.Point(12, 40);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(57, 13);
             this.label2.TabIndex = 2;
@@ -92,7 +95,7 @@
             // 
             // textBoxTitle
             // 
-            this.textBoxTitle.Location = new System.Drawing.Point(102, 42);
+            this.textBoxTitle.Location = new System.Drawing.Point(102, 37);
             this.textBoxTitle.Name = "textBoxTitle";
             this.textBoxTitle.Size = new System.Drawing.Size(185, 20);
             this.textBoxTitle.TabIndex = 3;
@@ -100,7 +103,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(13, 80);
+            this.label3.Location = new System.Drawing.Point(12, 66);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(76, 13);
             this.label3.TabIndex = 4;
@@ -108,7 +111,7 @@
             // 
             // textBoxYear
             // 
-            this.textBoxYear.Location = new System.Drawing.Point(102, 77);
+            this.textBoxYear.Location = new System.Drawing.Point(102, 63);
             this.textBoxYear.Name = "textBoxYear";
             this.textBoxYear.Size = new System.Drawing.Size(185, 20);
             this.textBoxYear.TabIndex = 5;
@@ -121,7 +124,7 @@
             this.groupBoxStudent.Controls.Add(this.comboBoxGroup);
             this.groupBoxStudent.Controls.Add(this.labelGroup);
             this.groupBoxStudent.Controls.Add(this.labelStudentName);
-            this.groupBoxStudent.Location = new System.Drawing.Point(12, 143);
+            this.groupBoxStudent.Location = new System.Drawing.Point(15, 147);
             this.groupBoxStudent.Name = "groupBoxStudent";
             this.groupBoxStudent.Size = new System.Drawing.Size(276, 106);
             this.groupBoxStudent.TabIndex = 6;
@@ -184,7 +187,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(13, 109);
+            this.label4.Location = new System.Drawing.Point(12, 118);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(79, 13);
             this.label4.TabIndex = 0;
@@ -196,7 +199,7 @@
             this.comboBoxStatus.Items.AddRange(new object[] {
             "Студент",
             "Сотрудник"});
-            this.comboBoxStatus.Location = new System.Drawing.Point(102, 106);
+            this.comboBoxStatus.Location = new System.Drawing.Point(101, 115);
             this.comboBoxStatus.Name = "comboBoxStatus";
             this.comboBoxStatus.Size = new System.Drawing.Size(186, 21);
             this.comboBoxStatus.TabIndex = 1;
@@ -211,7 +214,7 @@
             this.groupBoxEmployee.Controls.Add(this.labelAcademicDegree);
             this.groupBoxEmployee.Controls.Add(this.labelDepartment);
             this.groupBoxEmployee.Controls.Add(this.labelEmployeeName);
-            this.groupBoxEmployee.Location = new System.Drawing.Point(347, 143);
+            this.groupBoxEmployee.Location = new System.Drawing.Point(331, 147);
             this.groupBoxEmployee.Name = "groupBoxEmployee";
             this.groupBoxEmployee.Size = new System.Drawing.Size(272, 142);
             this.groupBoxEmployee.TabIndex = 7;
@@ -289,7 +292,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(366, 106);
+            this.button1.Location = new System.Drawing.Point(340, 113);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(148, 23);
             this.button1.TabIndex = 8;
@@ -298,7 +301,7 @@
             // 
             // Save
             // 
-            this.Save.Location = new System.Drawing.Point(16, 299);
+            this.Save.Location = new System.Drawing.Point(15, 390);
             this.Save.Name = "Save";
             this.Save.Size = new System.Drawing.Size(93, 39);
             this.Save.TabIndex = 9;
@@ -308,7 +311,7 @@
             // 
             // Cancel
             // 
-            this.Cancel.Location = new System.Drawing.Point(115, 299);
+            this.Cancel.Location = new System.Drawing.Point(118, 390);
             this.Cancel.Name = "Cancel";
             this.Cancel.Size = new System.Drawing.Size(93, 39);
             this.Cancel.TabIndex = 10;
@@ -318,7 +321,7 @@
             // labelPrintCopy
             // 
             this.labelPrintCopy.AutoSize = true;
-            this.labelPrintCopy.Location = new System.Drawing.Point(9, 252);
+            this.labelPrintCopy.Location = new System.Drawing.Point(12, 312);
             this.labelPrintCopy.Name = "labelPrintCopy";
             this.labelPrintCopy.Size = new System.Drawing.Size(104, 13);
             this.labelPrintCopy.TabIndex = 11;
@@ -327,7 +330,7 @@
             // labelDigCopy
             // 
             this.labelDigCopy.AutoSize = true;
-            this.labelDigCopy.Location = new System.Drawing.Point(9, 272);
+            this.labelDigCopy.Location = new System.Drawing.Point(12, 338);
             this.labelDigCopy.Name = "labelDigCopy";
             this.labelDigCopy.Size = new System.Drawing.Size(106, 13);
             this.labelDigCopy.TabIndex = 12;
@@ -335,36 +338,65 @@
             // 
             // textBoxPrintCopy
             // 
-            this.textBoxPrintCopy.Location = new System.Drawing.Point(119, 249);
+            this.textBoxPrintCopy.Location = new System.Drawing.Point(122, 309);
             this.textBoxPrintCopy.Name = "textBoxPrintCopy";
-            this.textBoxPrintCopy.Size = new System.Drawing.Size(169, 20);
+            this.textBoxPrintCopy.Size = new System.Drawing.Size(186, 20);
             this.textBoxPrintCopy.TabIndex = 13;
             // 
             // textBoxDigCopy
             // 
-            this.textBoxDigCopy.Location = new System.Drawing.Point(119, 269);
+            this.textBoxDigCopy.Location = new System.Drawing.Point(122, 335);
             this.textBoxDigCopy.Name = "textBoxDigCopy";
-            this.textBoxDigCopy.Size = new System.Drawing.Size(169, 20);
+            this.textBoxDigCopy.Size = new System.Drawing.Size(186, 20);
             this.textBoxDigCopy.TabIndex = 14;
             // 
-            // buttonOKdirect
+            // buttonOK
             // 
-            this.buttonOKdirect.Location = new System.Drawing.Point(294, 104);
-            this.buttonOKdirect.Name = "buttonOKdirect";
-            this.buttonOKdirect.Size = new System.Drawing.Size(34, 23);
-            this.buttonOKdirect.TabIndex = 15;
-            this.buttonOKdirect.Text = "ОК";
-            this.buttonOKdirect.UseVisualStyleBackColor = true;
-            this.buttonOKdirect.Click += new System.EventHandler(this.buttonOKdirect_Click);
+            this.buttonOK.Location = new System.Drawing.Point(293, 113);
+            this.buttonOK.Name = "buttonOK";
+            this.buttonOK.Size = new System.Drawing.Size(34, 23);
+            this.buttonOK.TabIndex = 15;
+            this.buttonOK.Text = "ОК";
+            this.buttonOK.UseVisualStyleBackColor = true;
+            this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
+            // 
+            // buttonAddFile
+            // 
+            this.buttonAddFile.Location = new System.Drawing.Point(314, 327);
+            this.buttonAddFile.Name = "buttonAddFile";
+            this.buttonAddFile.Size = new System.Drawing.Size(75, 35);
+            this.buttonAddFile.TabIndex = 16;
+            this.buttonAddFile.Text = "Добавить файл";
+            this.buttonAddFile.UseVisualStyleBackColor = true;
+            this.buttonAddFile.Click += new System.EventHandler(this.buttonAddFile_Click);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(12, 92);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(72, 13);
+            this.label5.TabIndex = 17;
+            this.label5.Text = "Число копий";
+            // 
+            // textBoxNumberOfCopy
+            // 
+            this.textBoxNumberOfCopy.Location = new System.Drawing.Point(101, 89);
+            this.textBoxNumberOfCopy.Name = "textBoxNumberOfCopy";
+            this.textBoxNumberOfCopy.Size = new System.Drawing.Size(186, 20);
+            this.textBoxNumberOfCopy.TabIndex = 18;
             // 
             // FormAddNewDoc
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(698, 366);
+            this.ClientSize = new System.Drawing.Size(655, 455);
+            this.Controls.Add(this.textBoxNumberOfCopy);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.buttonAddFile);
             this.Controls.Add(this.textBoxDigCopy);
             this.Controls.Add(this.textBoxPrintCopy);
-            this.Controls.Add(this.buttonOKdirect);
+            this.Controls.Add(this.buttonOK);
             this.Controls.Add(this.labelDigCopy);
             this.Controls.Add(this.labelPrintCopy);
             this.Controls.Add(this.Cancel);
@@ -425,6 +457,9 @@
         private System.Windows.Forms.TextBox textBoxDigCopy;
         private System.Windows.Forms.ComboBox comboBoxDirection;
         private System.Windows.Forms.Label labeldirection;
-        private System.Windows.Forms.Button buttonOKdirect;
+        private System.Windows.Forms.Button buttonOK;
+        private System.Windows.Forms.Button buttonAddFile;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox textBoxNumberOfCopy;
     }
 }

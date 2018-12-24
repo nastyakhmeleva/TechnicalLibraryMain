@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,12 +15,12 @@ namespace TechnicalLibrary
     {
         public static LibraryContainer model=new LibraryContainer();
         public MainForm ParentMainForm;
+        public byte[] FileDig;
         public FormAddNewDoc()
         {
             InitializeComponent();
             ShowComboboxes();
         }
-
         public void ShowComboboxes()
         {
             comboBoxTypeOfDoc.Items.Clear();
@@ -63,6 +64,16 @@ namespace TechnicalLibrary
                         catch (FormatException)
                         {
                             MessageBox.Show("Неверно указан год");
+                            return;
+                        }
+
+                        try
+                        {
+                            doc.NumberOfCopy = Int32.Parse(textBoxNumberOfCopy.Text);
+                        }
+                        catch (FormatException)
+                        {
+                            MessageBox.Show("Неверно указано количество копий");
                             return;
                         }
                         model.TypeSet.Find(model.TypeSet.Where(x => x.Name.Contains(comboBoxTypeOfDoc.Text)).ToList()[0]
@@ -152,20 +163,35 @@ namespace TechnicalLibrary
             comboBoxEmployeeName.DisplayMember = "Name";
         }
 
-        private void buttonOKdirect_Click(object sender, EventArgs e)
+        private void buttonOK_Click(object sender, EventArgs e)
         {
             if (comboBoxStatus.Text == "Студент")
             {
                 comboBoxDirection.DataSource = model.EducationDirectionSet.ToList();
                 comboBoxDirection.DisplayMember = "Name";
             }
+
+            if (comboBoxStatus.Text == "Сотрудник")
             {
-                if (comboBoxStatus.Text == "Сотрудник")
-                {
-                    comboBoxDepartment.DataSource = model.DepartmentSet.ToList();
-                    comboBoxDepartment.DisplayMember = "Name";
-                }
+                comboBoxDepartment.DataSource = model.DepartmentSet.ToList();
+                comboBoxDepartment.DisplayMember = "Name";
             }
         }
+        private void buttonAddFile_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog od = new OpenFileDialog();
+            byte[] FileDig = null;
+            if (od.ShowDialog() == DialogResult.OK)
+            {
+                string Name = od.FileName;
+
+                using (FileStream fs = new FileStream(Name, FileMode.Open))
+                {
+                    FileDig = new byte[fs.Length];
+                    fs.Read(FileDig, 0, FileDig.Length);
+                }
+                textBoxDigCopy.Text = Name;
+            }
         }
+    }
 }
