@@ -18,40 +18,8 @@ namespace TechnicalLibrary
         {
             InitializeComponent();
             ShowComboboxes();
-            
         }
 
-        public void addGroup()
-        {
-            comboBoxGroup.SelectedItem = "group";
-            EducationDirection eddir = (EducationDirection)comboBoxDirection.SelectedItem;
-            List<StudyGroup> listSG = model.StudyGroupSet.Where(x => x.EducationDirection.Id == eddir.Id).ToList();
-            comboBoxGroup.DataSource = listSG;
-            comboBoxGroup.DisplayMember = "Name";
-        }
-
-        //public void addStudentName()
-        //{
-        //    StudyGroup stgr = (StudyGroup)comboBoxGroup.SelectedItem;
-        //    List<Student> listSt = model.StudentSet.Where(x => x.StudyGroup.Id == stgr.Id).ToList();
-        //    comboBoxStudentName.DataSource = listSt;
-        //    comboBoxStudentName.DisplayMember = "Name";
-        //}
-        //public void addDirections()
-        //{
-        //    if (comboBoxStatus.Text == "Сотрудник")
-        //    {
-        //        comboBoxDepartment.DataSource = model.DepartmentSet.ToList();
-        //        comboBoxDepartment.DisplayMember = "Name";
-        //    }
-        //}
-        //public void addEmployeeName()
-        //{
-        //    Department depart = (Department)comboBoxDepartment.SelectedItem;
-        //    List<Employee> listEmp = model.EmployeeSet.Where(x => x.Department.Id == depart.Id).ToList();
-        //    comboBoxEmployeeName.DataSource = listEmp;
-        //    comboBoxEmployeeName.DisplayMember = "Name";
-        //}
         public void ShowComboboxes()
         {
             comboBoxTypeOfDoc.Items.Clear();
@@ -189,6 +157,13 @@ namespace TechnicalLibrary
                 comboBoxDirection.DataSource = model.EducationDirectionSet.ToList();
                 comboBoxDirection.DisplayMember = "Name";
             }
+            {
+                if (comboBoxStatus.Text == "Сотрудник")
+                {
+                    comboBoxDepartment.DataSource = model.DepartmentSet.ToList();
+                    comboBoxDepartment.DisplayMember = "Name";
+                }
+            }
         }
-    }
+        }
 }
