@@ -59,6 +59,7 @@
             this.labelDigCopy = new System.Windows.Forms.Label();
             this.textBoxPrintCopy = new System.Windows.Forms.TextBox();
             this.textBoxDigCopy = new System.Windows.Forms.TextBox();
+            this.buttonOKdirect = new System.Windows.Forms.Button();
             this.groupBoxStudent.SuspendLayout();
             this.groupBoxEmployee.SuspendLayout();
             this.SuspendLayout();
@@ -210,7 +211,7 @@
             this.groupBoxEmployee.Controls.Add(this.labelAcademicDegree);
             this.groupBoxEmployee.Controls.Add(this.labelDepartment);
             this.groupBoxEmployee.Controls.Add(this.labelEmployeeName);
-            this.groupBoxEmployee.Location = new System.Drawing.Point(298, 143);
+            this.groupBoxEmployee.Location = new System.Drawing.Point(347, 143);
             this.groupBoxEmployee.Name = "groupBoxEmployee";
             this.groupBoxEmployee.Size = new System.Drawing.Size(272, 142);
             this.groupBoxEmployee.TabIndex = 7;
@@ -288,7 +289,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(298, 106);
+            this.button1.Location = new System.Drawing.Point(366, 106);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(148, 23);
             this.button1.TabIndex = 8;
@@ -346,13 +347,24 @@
             this.textBoxDigCopy.Size = new System.Drawing.Size(169, 20);
             this.textBoxDigCopy.TabIndex = 14;
             // 
+            // buttonOKdirect
+            // 
+            this.buttonOKdirect.Location = new System.Drawing.Point(294, 104);
+            this.buttonOKdirect.Name = "buttonOKdirect";
+            this.buttonOKdirect.Size = new System.Drawing.Size(34, 23);
+            this.buttonOKdirect.TabIndex = 15;
+            this.buttonOKdirect.Text = "ОК";
+            this.buttonOKdirect.UseVisualStyleBackColor = true;
+            this.buttonOKdirect.Click += new System.EventHandler(this.buttonOKdirect_Click);
+            // 
             // FormAddNewDoc
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(582, 366);
+            this.ClientSize = new System.Drawing.Size(698, 366);
             this.Controls.Add(this.textBoxDigCopy);
             this.Controls.Add(this.textBoxPrintCopy);
+            this.Controls.Add(this.buttonOKdirect);
             this.Controls.Add(this.labelDigCopy);
             this.Controls.Add(this.labelPrintCopy);
             this.Controls.Add(this.Cancel);
@@ -413,5 +425,6 @@
         private System.Windows.Forms.TextBox textBoxDigCopy;
         private System.Windows.Forms.ComboBox comboBoxDirection;
         private System.Windows.Forms.Label labeldirection;
+        private System.Windows.Forms.Button buttonOKdirect;
     }
 }

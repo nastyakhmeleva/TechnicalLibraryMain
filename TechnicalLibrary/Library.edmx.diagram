@@ -6,7 +6,7 @@
     <edmx:Diagrams>
       <Diagram DiagramId="58b4702900f244ef9bfd9e4c61f0a54a" Name="Diagram1" ZoomLevel="99" >
         <EntityTypeShape EntityType="Library.Employee" Width="1.5" PointX="7.75" PointY="3.375" />
-        <EntityTypeShape EntityType="Library.Document" Width="1.5" PointX="2.75" PointY="3.125" />
+        <EntityTypeShape EntityType="Library.Document" Width="1.5" PointX="2.75" PointY="3.375" />
         <EntityTypeShape EntityType="Library.Note" Width="1.5" PointX="2.75" PointY="0.5" />
         <EntityTypeShape EntityType="Library.PeopleDocEntity" Width="1.5" PointX="4.875" PointY="3.875" />
         <AssociationConnector Association="Library.StDocEntityStudent" />
