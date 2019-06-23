@@ -31,12 +31,12 @@ namespace TechnicalLibrary
             }
         }
 
-        private void Save_Click(object sender, EventArgs e)
+        public void SaveNewDoc()
         {
             var documents = model.DocumentSet.Where(u => u.Name.Contains(textBoxTitle.Text)).ToList();
             if (documents.Count <= 0)
             {
-                if (((textBoxTitle.Text != "") && (textBoxYear.Text != "") && (textBoxPrintCopy.Text!="")&&(textBoxDigCopy.Text!="")&&
+                if (((textBoxTitle.Text != "") && (textBoxYear.Text != "") && (textBoxPrintCopy.Text != "") && (textBoxDigCopy.Text != "") &&
                      (comboBoxTypeOfDoc.SelectedItem != null) && (comboBoxStatus.SelectedItem != null) &&
                      (comboBoxGroup.SelectedItem != null) && (comboBoxStudentName.SelectedItem != null)) ||
 
@@ -82,12 +82,11 @@ namespace TechnicalLibrary
                             .ToList()[0].Id);
                         type.Document.Add(doc);
                     }
-                    
                     model.DocumentSet.Add(doc);
                     model.SaveChanges();
                     MessageBox.Show("Новый документ успешно добавлен");
                     Close();
-                    
+
 
                     PeopleDocEntity ent = new PeopleDocEntity();
                     {
@@ -124,7 +123,7 @@ namespace TechnicalLibrary
                                 .ToList()[0].Id);
                         employee.PeopleDocEntity.Add(ent);
                     }
-                    
+
                     model.DocumentSet.Find(model.DocumentSet.Where(x => x.Name.Contains(textBoxTitle.Text)).ToList()[0]
                         .Id);
                     doc.PeopleDocEntity.Add(ent);
@@ -132,6 +131,11 @@ namespace TechnicalLibrary
                     model.SaveChanges();
                 }
             }
+        }
+
+        private void Save_Click(object sender, EventArgs e)
+        {
+            SaveNewDoc();
         }
 
         private void FormAddNewDoc_FormClosing(object sender, FormClosingEventArgs e)
@@ -177,7 +181,8 @@ namespace TechnicalLibrary
                 comboBoxDepartment.DisplayMember = "Name";
             }
         }
-        private void buttonAddFile_Click(object sender, EventArgs e)
+
+        public void AddFile()
         {
             OpenFileDialog od = new OpenFileDialog();
             byte[] FileDig = null;
@@ -192,6 +197,11 @@ namespace TechnicalLibrary
                 }
                 textBoxDigCopy.Text = Name;
             }
+        }
+
+        private void buttonAddFile_Click(object sender, EventArgs e)
+        {
+            AddFile();
         }
     }
 }
