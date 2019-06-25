@@ -34,6 +34,7 @@
             this.Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Year = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Author = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DeleteDoc = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDoc)).BeginInit();
             this.SuspendLayout();
             // 
@@ -88,12 +89,23 @@
             this.Author.Name = "Author";
             this.Author.Width = 250;
             // 
+            // DeleteDoc
+            // 
+            this.DeleteDoc.Location = new System.Drawing.Point(12, 86);
+            this.DeleteDoc.Name = "DeleteDoc";
+            this.DeleteDoc.Size = new System.Drawing.Size(134, 68);
+            this.DeleteDoc.TabIndex = 2;
+            this.DeleteDoc.Text = "Удалить документ";
+            this.DeleteDoc.UseVisualStyleBackColor = true;
+            this.DeleteDoc.Click += new System.EventHandler(this.DeleteDoc_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(832, 462);
+            this.Controls.Add(this.DeleteDoc);
             this.Controls.Add(this.dataGridViewDoc);
             this.Controls.Add(this.AddNewDoc);
             this.ShowIcon = false;
@@ -112,6 +124,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Name;
         private System.Windows.Forms.DataGridViewTextBoxColumn Year;
         private System.Windows.Forms.DataGridViewTextBoxColumn Author;
+        private System.Windows.Forms.Button DeleteDoc;
     }
 }
 

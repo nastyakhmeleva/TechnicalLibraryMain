@@ -56,12 +56,47 @@ namespace TechnicalLibrary
             }
         }
 
+        private void deleteDocument()
+        {
+            try
+            {
+                int id = Int32.Parse(dataGridViewDoc.CurrentRow.Cells[0].Value.ToString());
+                foreach (PeopleDocEntity pd in model.PeopleDocEntitySet)
+                {
+                    if (pd.Document.Id == id)
+                        model.PeopleDocEntitySet.Remove(pd);
+                }
+                model.DocumentSet.Remove(model.DocumentSet.Find(id));
+                model.SaveChanges();
+                ShowTable();
+            }
+            catch (NullReferenceException)
+            {
+                MessageBox.Show("Строка не выбрана");
+            }
+        }
+
         private void AddNewDoc_Click(object sender, EventArgs e)
         {
             FormAddNewDoc newForm=new FormAddNewDoc();
             newForm.ParentMainForm = this;
             newForm.Show();
             Hide();
+        }
+
+        private void DeleteDoc_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show(
+                "Подтвердить удаление документа?",
+                "Сообщение",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question,
+                MessageBoxDefaultButton.Button2,
+                MessageBoxOptions.DefaultDesktopOnly);
+            if (result == DialogResult.Yes)
+            {
+                deleteDocument();
+            }
         }
     }
 }
